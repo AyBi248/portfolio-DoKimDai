@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — [Đỗ Kim Đại]</title>
+  <!-- Final portfolio built to your checklist
+       - 10 sections (Banner, Navbar, Thông tin cá nhân, Mục tiêu, Sở thích, Ngôn ngữ/Kỹ năng, Chứng chỉ, Dự án, Liên hệ, Footer)
+       - Fonts: Montserrat (headings) + Lato (body)
+       - Black background preserved
+       - Flexbox + Grid layout, animations, custom scrollbar + arrow, responsive, clean comments
+       - "Xem thêm / Thu gọn" for long content (mobile & desktop)
+       - Contact form: responsive + mailto fallback (works on all devices)
+       Replace all [PLACEHOLDER] values (name, images, projects...) with your real data.
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =================== Root variables =================== */
+    :root{
+      --bg-900: #121218;    /* deep black background as requested */
+      --card: #ffffff;
+      --muted: #94a3b8;
+      --accent: #0ea5a4;    /* teal-accent (can be changed) */
+      --accent-2: #2563eb;  /* secondary blue gradient */
+      --max-width: 1100px;
+      --radius: 14px;
+      --gap: 18px;
+      --trans: 220ms;
+    }
+
+    /* ========== Global reset & typography ========== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;padding:24px;background:linear-gradient(180deg,var(--bg-900),#000000);color:var(--card);
+      font-family: 'Lato', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.45;display:flex;flex-direction:column;min-height:100vh;
+    }
+
+    /* ========== Site container ========== */
+    .site{width:100%;max-width:var(--max-width);margin:0 auto;display:flex;flex-direction:column;gap:var(--gap)}
+
+    /* ========== NAVBAR ========== */
+    header.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:14px;z-index:80;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,0.02);backdrop-filter:blur(6px)}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:48px;height:48px;border-radius:10px;object-fit:cover}
+    .brand h1{font-family:'Montserrat';font-size:16px;margin:0}
+    nav ul{display:flex;gap:8px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--card);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+    nav a:hover{background:rgba(255,255,255,0.03);transform:translateY(-3px)}
+    /* Khi nhấp vào mục trong navbar, hiển thị trạng thái được chọn */
+nav a.active {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.6);
+  transform: translateY(-3px);
+  transition: all 0.25s ease-in-out;
+}
+
+    /* ========== HERO: grid layout (banner + sidebar) ========== */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+
+    /* Banner left card */
+    .banner{background:linear-gradient(135deg, rgba(14,165,164,0.06), rgba(14,165,164,0.02));padding:18px;border-radius:12px;display:flex;flex-direction:column;gap:12px;min-height:300px;position:relative}
+    .intro{display:flex;gap:14px;align-items:center}
+    .avatar{width:120px;height:120px;border-radius:16px;overflow:hidden;border:3px solid rgba(255,255,255,0.04)}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .intro h2{font-family:'Montserrat';font-size:22px;margin:0}
+
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px}
+
+    /* Card shared style */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:14px;border-radius:12px;color:var(--card)}
+
+    /* Projects list */
+    .projects{display:flex;flex-direction:column;gap:12px}
+    .project{display:grid;grid-template-columns:1fr 120px;gap:12px;align-items:center;padding:12px;border-radius:10px;transition:transform var(--trans);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02))}
+    .project:hover{transform:translateY(-6px)}
+    .project img{width:100%;height:76px;object-fit:cover;border-radius:8px}
+    .meta{font-size:13px;color:var(--muted)}
+
+    /* Sidebar */
+    .sidebar{display:flex;flex-direction:column;gap:12px}
+    .card .small{font-size:13px;color:var(--muted)}
+
+    /* Skills area: horizontal scroll with arrow */
+    .skills-wrap{position:relative}
+    .skills{display:flex;gap:10px;overflow:auto;padding:12px;border-radius:10px;scroll-behavior:smooth}
+    .skills::-webkit-scrollbar{height:10px}
+    .skills::-webkit-scrollbar-track{background:transparent}
+    .skills::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:999px}
+    .skill{min-width:200px;background:rgba(255,255,255,0.02);padding:10px;border-radius:10px}
+    .skill .bar{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;margin-top:8px;overflow:hidden}
+    .skill .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:999px}
+
+    .skill-arrow{position:absolute;right:8px;top:8px;background:var(--card);color:#07101a;border-radius:8px;padding:8px;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.5)}
+
+    /* Hobbies: smoother animations (avoid JS delay) */
+    .hobbies{display:flex;gap:10px;flex-wrap:wrap}
+    .hobby{padding:10px 12px;border-radius:999px;background:rgba(255,255,255,0.03);transition:transform var(--trans),box-shadow var(--trans);will-change:transform}
+    .hobby:hover{transform:translateY(-8px);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+
+    /* Gallery for photos (4 images) */
+    .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .gallery img{width:100%;height:250px;object-fit:cover;border-radius:10px}
+
+    /* "Xem thêm" content handling */
+    .more-toggle{display:none;border:none;background:transparent;color:var(--accent);font-weight:700;cursor:pointer;margin-top:8px}
+    .more-content.collapsed{max-height:160px;overflow:hidden;position:relative}
+    .more-content.collapsed:after{content:"";position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(to bottom,transparent,rgba(2,6,23,0.75))}
+    .more-content.expanded{max-height:none}
+
+    /* Contact Form: responsive and aligned */
+    form#contactForm{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    form input,form textarea{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--card);font-family:'Lato'}
+    form textarea{grid-column:1 / -1}
+    form .actions{grid-column:1 / -1;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--card)}
+
+    /* Github styled button larger hit area */
+    .github-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,#0f1724,var(--accent));color:#fff;text-decoration:none;font-weight:700}
+    .facebook-btn {display: inline-flex;align-items: center;gap: 8px;background: linear-gradient(90deg, #040252, #0d47a1);color: #fff;padding: 8px 16px;border-radius: 8px;text-decoration: none;font-weight: 700;transition: all 0.3s ease;}
+    /* Footer pinned to bottom of content area (page min-height ensures near bottom) */
+    footer.site-foot{margin-top:auto}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px;border-radius:10px;background:rgba(255,255,255,0.02)}
+
+    /* =================== CẬP NHẬT TRONG PHẦN <style> =================== */
+
+/* 1. Đảm bảo nội dung luôn hiển thị đầy đủ trên màn hình lớn */
+.more-content.collapsed {
+    /* Đặt lại trạng thái cho PC (mặc định) */
+    max-height: none !important; /* Quan trọng: Bỏ giới hạn chiều cao */
+    overflow: visible !important;
+}
+.more-content.collapsed:after {
+    content: none !important; /* Xóa hiệu ứng mờ */
+}
+
+/* 2. Ẩn nút "Xem thêm" mặc định trên PC */
+.more-toggle {
+    display: none !important;
+    border: none;
+    background: transparent;
+    color: var(--accent);
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+/* 3. QUAN TRỌNG: Chỉ áp dụng giới hạn và hiển thị nút trên Mobile/Tablet (< 980px) */ 
+@media (max-width: 980px) 
+{ 
+  /* HIỆN THỊ NÚT XEM THÊM */ 
+  .more-toggle { display: block !important; } 
+  /* ÁP DỤNG GIỚI HẠN CHIỀU CAO (THU GỌN) */ 
+  .more-content.collapsed 
+  {
+     max-height: 160px !important; 
+     /* Giới hạn chiều cao */ 
+     overflow: hidden !important; position: relative; } 
+     /* ÁP DỤNG HIỆU ỨNG MỜ (FADE OUT) */ 
+     .more-content.collapsed:after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: linear-gradient(to bottom, transparent, rgba(2, 6, 23, 0.75));
+     }
+     } 
+     /* Responsive rules */ 
+     @media (max-width:980px)
+     {
+       .hero{grid-template-columns:1fr} 
+       .sidebar{order:2} 
+       .banner{order:1} 
+       form#contactForm{grid-template-columns:1fr} 
+       .more-toggle{display:block} } 
+       @media (prefers-reduced-motion:reduce)
+       {*{transition:none!important}
+      } 
+      /* ============================= */ /* 🔧 BỔ SUNG RESPONSIVE LAYOUT */ /* ============================= */ 
+      /* Banner + Avatar + Intro */ 
+      @media (max-width: 768px) 
+      { 
+        .banner { 
+          display: flex; 
+          flex-direction: column; 
+          align-items: center; 
+          text-align: center; 
+          padding: 20px 10px; } 
+        .intro { flex-direction: column; align-items: center; } 
+        .avatar img { width: 120px; height:120px; } 
+      } /* Navbar Toggle (Mobile) */ 
+      .menu-toggle { display: none; font-size: 22px; cursor: pointer; color: var(--card); } 
+      @media (max-width: 600px) { 
+        .menu-toggle { display: block; } nav ul { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 100%; right: 0; width: 180px; border-radius: 10px; padding: 10px; } nav ul.show { display: flex; } } /* Kỹ năng (Grid tự chia) */ .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; } /* Dự án (Project Section) */  @media (max-width: 700px) { .project { grid-template-columns: 1fr; } } /* Form liên hệ */ @media (max-width: 600px) { #contactForm { width: 100%; } #contactForm input, #contactForm textarea, #contactForm button { width: 100%; font-size: 15px; } } /* Hobbies */ .hobby { transition: transform 0.2s ease-in-out; } .hobby:hover { transform: scale(1.05); } /* Scrollbar + Arrow */ .skills::-webkit-scrollbar-button:single-button { background-color: var(--accent); display: block; height: 12px; } /* Footer giữ sát đáy */ body { display: flex; flex-direction: column; min-height: 100vh; } footer.site-foot { margin-top: auto; } /* 🌐 Giao diện Navbar trên Mobile */ @media (max-width: 768px) { nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 10px; } nav a { display: inline-block; font-size: 15px; padding: 6px 12px; border-radius: 8px; color: #f0f0f0; text-align: center; background: transparent; transition: all 0.25s ease-in-out; } nav a:hover { background: rgba(255, 255, 255, 0.08); } /* 🎯 Mục đang chọn (active) hiển thị đẹp, không tràn */ nav a.active { color: #fff; transform: none; /* loại bỏ nhô lên trên mobile */ } }
+
+
+  </style>
+</head>
+<body>
+  <div class="site" role="main">
+
+    <!-- NAVBAR -->
+    <header class="nav" role="banner">
+      <div class="brand">
+        <img src="avatar2.jpg" alt="Avatar" loading="lazy">
+        <div>
+          <h1>Đỗ Kim Đại</h1>
+          <div style="font-size:12px;color:var(--muted)">Senior Student | Web Developer | IT Major</div>
+        </div>
+      </div>
+      <nav role="navigation" aria-label="Main">
+        <ul>
+          <li><a href="#about">Giới thiệu</a></li>
+          <li><a href="#projects">Dự án</a></li>
+          <li><a href="#skills">Năng lực</a></li>
+          <li><a href="#contact">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- HERO: Banner (left) + Sidebar (right) -->
+    <section class="hero">
+      <section class="banner card" id="about" aria-labelledby="aboutTitle">
+        <div class="intro">
+          <div class="avatar"><img src="avatar.jpg" alt="Ảnh cá nhân" loading="lazy"></div>
+          <div>
+            <h2 id="aboutTitle">Đỗ Kim Đại</h2>
+            <p style="margin:6px 0;color:var(--muted)">Tôi là sinh viên năm 4 Trường Đại Học Giao Thông Vận Tải — Mục tiêu nghề nghiệp muốn hướng tự do thiết kế và xây dựng website</p>
+            <div class="badges"><span class="badge">Full-stack</span><span class="badge">Front-end</span><span class="badge">Developer</span></div>
+          </div>
+        </div>
+
+        <!-- Mục tiêu & mô tả dài (xem thêm support) -->
+        <div style="margin-top:12px">
+          <h3 style="margin:0 0 8px 0">Mục tiêu</h3>
+          <div class="more-content collapsed" id="objectiveText">
+            <h4>Trước khi tốt nghiệp</h4>
+            <p>Hiện tại, tôi là Senior Student chuyên ngành Công nghệ Thông tin và đang tập trung vào ba mục tiêu chính trước khi tốt nghiệp: Hoàn thành xuất sắc các tín chỉ để đủ điều kiện ra trường đúng hạn; rèn luyện chuyên sâu kỹ năng lập trình và thuật toán thông qua LeetCode; và nâng cao trình độ tiếng Anh.</p>
+            <h4>Sau khi tốt nghiệp</h4>
+            <p>Tôi sẽ bước vào giai đoạn phát triển đa chiều và chuyên sâu. Tôi đặt mục tiêu thực tập tại các công ty công nghệ uy tín để áp dụng kiến thức, trau dồi kinh nghiệm thực tế và làm quen với quy trình làm việc chuyên nghiệp. Về mặt kiến thức, tôi dự định nghiên cứu thêm các lĩnh vực mới của ngành IT như Trí tuệ Nhân tạo (AI) để mở rộng phạm vi chuyên môn. Để tăng cường khả năng hội nhập và làm việc quốc tế, tôi sẽ học thêm các ngoại ngữ khác ngoài tiếng Anh, cụ thể là Tiếng Nhật và Tiếng Trung.</p>
+          </div>
+          <button class="more-toggle" data-target="objectiveText">Xem thêm</button>
+        </div>
+
+        <!-- HOBBIES / PERSONAL INTERESTS (smooth) -->
+        <section class="card" id="hobbies">
+          <h3>Sở thích cá nhân</h3>
+            <div class="hobbies" id="hobbyList" style="margin-top:10px">
+            <div class="hobby">🏺Sưu Tầm</div>
+            <div class="hobby">🎵Nghe nhạc</div>
+            <div class="hobby">🎮Chơi games</div>
+            <div class="hobby">✈️đi du lịch</div>
+          </div>
+        </section>
+
+        <!-- 4 photos gallery -->
+        <div style="margin-top:14px">
+          <h3 style="margin:0 0 8px 0">Ảnh cá nhân</h3>
+          <div class="gallery">
+            <img src="avatar3.jpg" alt="Ảnh 1" loading="lazy">
+            <img src="avatar5.jpg" alt="Ảnh 2" loading="lazy">
+            <img src="avatar4.jpg" alt="Ảnh 3" loading="lazy">
+            <img src="avatar6.jpg" alt="Ảnh 4" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="card">
+          <h3>Thông tin cá nhân</h3>
+          <p class="small">Email: <strong>dokimdai109@gmail.com</strong></p>
+          <p class="small">SĐT: <strong>+84 0932087856</strong></p>
+          <p class="small">Địa chỉ: <strong>[Thành phố Thủ Đức, Thành phố Hồ Chí Minh/Việt Nam]</strong></p>
+        </div>
+        
+        <div class="card">
+          <h3>Liên kết</h3>
+          <div style="display:flex;gap:8px">
+            <a class="github-btn" href="https://github.com/AyBi248" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill="#fff" d="M12 .5C5.67.5.5 5.67.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.55-3.88-1.55-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.72 1.27 3.38.97.11-.76.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.2-3.09-.12-.3-.52-1.52.11-3.16 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 2.92-.39c.99 0 1.99.13 2.92.39 2.22-1.5 3.2-1.18 3.2-1.18.63 1.64.23 2.86.11 3.16.75.81 1.2 1.83 1.2 3.09 0 4.42-2.7 5.39-5.27 5.67.42.36.79 1.07.79 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.68.8.56C20.71 21.39 24 17.08 24 12c0-6.33-5.17-11.5-12-11.5z"></path></svg>
+              Github
+            </a>
+            <a class="facebook-btn" href="https://facebook.com/aio721015" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill="#fff" d="M22.675 0H1.325C.593 0 0 .592 0 1.324v21.352C0 23.408.593 24 1.325 24h11.495v-9.294H9.691V11.41h3.129V8.816c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.587l-.467 3.296h-3.12V24h6.116C23.407 24 24 23.408 24 22.676V1.324C24 .592 23.407 0 22.675 0z"></path></svg>
+              Facebook
+            </a>
+            <a class="btn ghost" href="/cv.pdf" target="_blank">Dowload CV</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- PROJECTS (detailed with role & contribution & time) -->
+    <section class="card" id="projects">
+      <h3>Dự án tiêu biểu</h3>
+      <div class="projects" style="margin-top:12px">
+        <!-- Project A -->
+        <article class="project">
+          <div>
+            <h4>App xem phim trực tuyến</h4>
+            <div class="meta">Vai trò: <strong>Front-end Developer</strong> • Thời gian: <strong>06/2024 - 09/2024</strong></div>
+            <div class="more-content collapsed" id="proA">
+            <p style="margin-top:8px">
+            Mô tả: App Xem Phim là nền tảng giải trí chất lượng cao, mang đến thư viện nội dung điện ảnh phong phú, được cập nhật liên tục và cá nhân hóa theo sở thích người dùng. Ứng dụng cung cấp trải nghiệm xem mượt mà, không gián đoạn với chất lượng hình ảnh lên tới 4K/HDR. Để tối đa hóa tiện ích, App Xem Phim cho phép người dùng tải phim về xem ngoại tuyến và tích hợp cổng thanh toán VNPay an toàn để đăng ký các gói hội viên linh hoạt.
+          </p>
+          <p>Tiện ích cốt lõi:
+            <hr>- Chất lượng cao: Hỗ trợ 4K/HDR.
+            <hr>- Xem ngoại tuyến: Tải phim về xem khi không có internet.
+            <hr>- Đề xuất thông minh: Thuật toán cá nhân hóa nội dung.
+            <hr>- Thanh toán VNPay: Nhanh chóng, bảo mật cho các gói hội viên.</p>
+            <a href="project-detail.html?id=1" class="btn ghost">Xem chi tiết</a>
+            </div>
+            <button class="more-toggle" data-target="proA">Xem thêm</button>  
+          </div>
+          <img src="appxemphim.jpg" alt="Project A">
+        </article>
+        
+        <!-- Project B -->
+        <article class="project">
+          <div>
+            <h4>Ứng dụng Điểm danh</h4>
+            <div class="meta">Vai trò: <strong>Team Lead</strong> • Thời gian: <strong>01/2023 - 05/2023</strong></div>
+            <div class="more-content collapsed" id="proB">
+            <p style="margin-top:8px">
+            Mô tả: Web Đặt Phòng là giải pháp trực tuyến giúp người dùng tìm kiếm, so sánh và đặt phòng khách sạn, resort một cách dễ dàng và minh bạch. Website cung cấp hệ thống tìm kiếm thông minh với các bộ lọc chi tiết và hiển thị các đánh giá xác thực từ khách hàng đã lưu trú. Đặc biệt, Web Đặt Phòng cho phép người dùng đăng ký các Gói Hội Viên độc quyền để nhận ưu đãi, với tất cả giao dịch thanh toán được xử lý an toàn, tức thời thông qua tích hợp VNPay.
+          </p>
+          <p>Tiện ích cốt lõi:
+            <hr>- Tìm kiếm & So sánh: Bộ lọc nâng cao theo tiện nghi và địa điểm.
+            <hr>- Đánh giá minh bạch: Hiển thị đánh giá xác thực từ người dùng.
+            <hr>- Gói Hội Viên Ưu Đãi: Lợi ích độc quyền cho khách hàng thân thiết.
+            <hr>- Thanh toán VNPay: Nhanh chóng, thuận tiện khi đặt phòng mọi lúc mọi nơi</p>
+            <a href="project-detail.html?id=1" class="btn ghost">Xem chi tiết</a>
+            </div>
+            <button class="more-toggle" data-target="proB">Xem thêm</button>
+          </div>
+          <img src="webdatphong.jpg" alt="Project B">
+        </article>
+        
+        <!-- Add more projects as needed -->
+      </div>
+    </section>
+
+    <!-- SKILLS / LANGUAGES with custom scroll and arrow button -->
+    <section class="card" id="skills">
+      <h3>Năng lực chuyên môn</h3>
+      <p class="small">Kéo ngang để xem thêm các năng lực chuyên môn tôi học ở trường trong 4 năm qua</p>
+      <div class="skills-wrap" style="margin-top:10px">
+        <div class="skills" id="skillsScroll" tabindex="0" aria-label="Danh sách kỹ năng">
+          <div class="skill">
+            <strong>HTML / CSS</strong>
+            <div class="bar"><i style="width:95%"></i></div>
+            <small class="meta">2023 — nay</small>
+          </div>
+          <div class="skill">
+            <strong>JavaScript / TypeScript</strong>
+            <div class="bar"><i style="width:88%"></i></div>
+            <small class="meta">2023 — nay</small>
+          </div>
+          <div class="skill">
+            <strong>React / Next.js</strong>
+            <div class="bar"><i style="width:82%"></i></div>
+            <small class="meta">2024 — nay</small>
+          </div>
+          <div class="skill">
+            <strong>SQL / Database</strong>
+            <div class="bar"><i style="width:70%"></i></div>
+            <small class="meta">2021 — nay</small>
+          </div>
+          <div class="skill">
+            <strong>C++ / Python</strong>
+            <div class="bar"><i style="width:70%"></i></div>
+            <small class="meta">2021 — nay</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Chứng chỉ-->
+    <div class="card">
+        <h3>Chứng chỉ</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <p class="small">Hiện tại không thấy</p>
+        </div>
+    </div>
+
+    <!-- LANGUAGES & SOFT SKILLS -->
+    <section class="card">
+      <h3>Ngôn ngữ & Kỹ năng</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
+        <div>
+          <strong>Tiếng Anh</strong>
+          <p class="small">Trình độ: Toiec 5 — Giao tiếp chuyên ngành lĩnh vực IT</p>
+          <strong>Ngôn ngữ lập trình</strong>
+          <p class="small">C++, Python, C#, Javascript</p>
+        </div>
+        <div>
+          <strong>Kỹ năng</strong>
+          <p class="small">Teamwork, Agile, Communication, Time management, Developer</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LONG CONTENT (example) with xem them toggle for mobile/desktop -->
+    <section class="card">
+      <h3>Thông tin mở rộng</h3>
+      <div class="more-content collapsed" id="longInfo" style="margin-top:10px">
+        <p>Hiện tại, tôi là Đỗ Kim Đại, sinh viên năm 4 chuyên ngành Công nghệ Thông tin tại Trường Đại Học Giao Thông Vận Tải, đang tập trung phát triển bản thân trở thành một Nhà phát triển Web (Full-stack/Front-end) toàn diện. Quá trình học tập của tôi luôn được kết hợp giữa việc rèn luyện Cấu trúc dữ liệu & Thuật toán và kinh nghiệm thực chiến với các công nghệ hiện đại.</p>
+        <p>Kinh nghiệm làm việc được thể hiện rõ qua các dự án. Trong Dự án "App Xem Phim Trực tuyến", tôi đảm nhận vai trò Phát triển Front-end bằng ReactJS và SCSS, áp dụng Lazy Loading để tối ưu hóa thời gian tải trang ban đầu lên đến 30%. Với Dự án "Ứng dụng Điểm danh", tôi là Team Leader kiêm Backend Developer, chịu trách nhiệm Thiết kế RESTful API bằng Node.js/Express và đảm bảo chất lượng code bằng cách viết Unit Test cho các endpoints cốt lõi. Ngoài các kỹ năng Frontend (React Hooks, Next.js, Redux) và Backend (Node.js, MySQL), tôi còn thành thạo các công cụ quy trình như Git/Github và Agile/Scrum.</p>
+        <P>Nhìn về tương lai (2025–2027), tôi đặt mục tiêu phát triển chuyên sâu qua việc chinh phục các chứng chỉ công nghệ quan trọng, bắt đầu với AWS Certified Cloud Practitioner hoặc Microsoft Azure Fundamentals (AZ-900) để làm chủ môi trường Cloud Computing. Sau đó, tôi sẽ hướng tới các chứng chỉ lập trình chuyên biệt như Certified Kubernetes Application Developer (CKAD). Song song, tôi cam kết tham gia và đóng góp vào các dự án mã nguồn mở trên Github và nghiên cứu các lĩnh vực mới như ứng dụng cơ bản của Machine Learning trong việc cá nhân hóa trải nghiệm người dùng web, nhằm mở rộng phạm vi chuyên môn và đóng góp vào cộng đồng công nghệ.</P>
+      </div>
+      <button class="more-toggle" data-target="longInfo">Xem thêm</button>
+    </section>
+
+    <!-- CONTACT (form responsive + mailto fallback) -->
+    <section class="card" id="contact">
+      <h3>Liên hệ</h3>
+      <form id="contactForm" autocomplete="on">
+        <input type="text" name="name" placeholder="Họ và tên" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="subject" placeholder="Chủ đề">
+        <textarea name="message" placeholder="Nội dung" rows="5" required></textarea>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">Gửi liên hệ</button>
+          <a class="btn ghost" id="mailtoFallback" href="mailto:dokimdai109@gmail.com">Gửi bằng Email</a>
+        </div>
+      </form>
+      <p class="small" style="margin-top:8px">Lưu ý: Form dùng action demo. Khi deploy, thay bằng endpoint thực tế (API, Formspree, Netlify Forms...). Nếu không, người dùng có thể gửi bằng ứng dụng email (nút Gửi bằng Email).</p>
+    </section>
+
+    <!-- FOOTER pinned close to bottom -->
+    <footer class="site-foot">
+      <div class="footer-inner">
+        <div>© <strong>Đỗ Kim Đại</strong> — <small class="small">Updated: <span id="updatedDate"></span></small></div>
+        <div style="display:flex;gap:8px;align-items:center">
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    /* ================== Interactivity (clean, commented) ================== */
+
+    // Helper: toggle more-content for any section (works on mobile & desktop)
+    document.querySelectorAll('.more-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target || btn.getAttribute('data-target');
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        const expanded = el.classList.toggle('expanded');
+        el.classList.toggle('collapsed');
+        btn.textContent = expanded ? 'Thu gọn' : 'Xem thêm';
+      });
+    });
+
+    // Skills scroll arrow: scrolls skills container by 300px
+    const skillBtn = document.getElementById('skillScrollBtn');
+    const skills = document.getElementById('skillsScroll');
+    if (skillBtn && skills) {
+      skillBtn.addEventListener('click', () => skills.scrollBy({left: 300, behavior: 'smooth'}));
+      // keyboard support for accessibility
+      skills.addEventListener('keydown', (ev) => {
+        if (ev.key === 'ArrowRight') { skills.scrollBy({left:200,behavior:'smooth'}); ev.preventDefault(); }
+        if (ev.key === 'ArrowLeft') { skills.scrollBy({left:-200,behavior:'smooth'}); ev.preventDefault(); }
+      });
+    }
+
+    // Hobbies smoothness fix: use will-change for better GPU compositing
+    document.querySelectorAll('.hobby').forEach(h => h.style.willChange = 'transform');
+
+    // Contact form: responsive handling + mailto fallback
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      const name = data.get('name') || '';
+      const email = data.get('email') || '';
+      const subject = data.get('subject') || 'Liên hệ từ Portfolio';
+      const message = data.get('message') || '';
+
+      // Try to send via fetch to a demo endpoint if provided (commented out).
+      // If no backend available, fallback to mailto link which works on all devices.
+
+      const mailto = `mailto:you@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('Tên: '+name+'\nEmail: '+email+'\n\n'+message)}`;
+      // open mail client (works on mobile & desktop)
+      window.location.href = mailto;
+
+      // Clear form after initiating mailto
+      form.reset();
+    });
+
+    // Set updated date to today
+    document.getElementById('updatedDate').textContent = new Date().toLocaleDateString();
+
+    // Improve image loading
+    document.querySelectorAll('img').forEach(img => img.loading = 'lazy');
+
+    // Smooth nav scrolling
+    document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+
+  </script>
+  
+  <script>
+  // Toggle menu mobile
+  const toggleBtn = document.createElement('div');
+  toggleBtn.classList.add('menu-toggle');
+  toggleBtn.textContent = '☰';
+  document.querySelector('.nav').insertBefore(toggleBtn, document.querySelector('nav'));
+
+  toggleBtn.addEventListener('click', () => {
+    document.querySelector('nav ul').classList.toggle('show');
+  });
+
+  // Arrow scroll (tuỳ chọn thêm cho phần skills)
+  const skill = document.querySelector('.skills');
+  if (skills) {
+    const arrowLeft = document.createElement('div');
+    const arrowRight = document.createElement('div');
+    Object.assign(arrowLeft.style, {
+      position: 'absolute', left: '5px', top: '50%', transform: 'translateY(-50%)',
+      cursor: 'pointer', fontSize: '18px', color: 'var(--accent)'
+    });
+    Object.assign(arrowRight.style, {
+      position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%)',
+      cursor: 'pointer', fontSize: '18px', color: 'var(--accent)'
+    });
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'relative';
+    skills.parentNode.insertBefore(wrapper, skills);
+    wrapper.appendChild(skills);
+    wrapper.appendChild(arrowLeft);
+    wrapper.appendChild(arrowRight);
+    arrowLeft.onclick = () => (skills.scrollLeft -= 120);
+    arrowRight.onclick = () => (skills.scrollLeft += 120);
+  }
+</script>
+
+  <script>
+  // Khi người dùng nhấp vào mục trong navbar
+  const navLinks = document.querySelectorAll('nav a');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // Xóa active khỏi tất cả liên kết
+      navLinks.forEach(l => l.classList.remove('active'));
+
+      // Thêm active cho mục hiện tại
+      this.classList.add('active');
+
+      // Cuộn mượt đến phần được chọn
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        window.scrollTo({
+          top: targetElement.offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Khi cuộn trang, tự động cập nhật mục active
+  window.addEventListener('scroll', () => {
+    const fromTop = window.scrollY + 120; // điểm bắt đầu
+    navLinks.forEach(link => {
+      const section = document.querySelector(link.getAttribute('href'));
+      if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+
+</body>
+</html>
