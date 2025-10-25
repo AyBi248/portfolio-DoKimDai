@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhóm Dự Án - Thông tin Thành viên</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(90deg, #111, #000);
+      position: relative;
+    }
+    header a {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #00bfff;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    header a:hover {
+      background-color: #0099cc;
+    }
+    h1 {
+      color: #00bfff;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      color: #ccc;
+      font-weight: normal;
+    }
+    .project-image {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .project-image img {
+      width: 80%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00bfff44;
+    }
+    .team-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      padding: 50px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .member {
+      background-color: #111;
+      border: 1px solid #333;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .member:hover {
+      transform: scale(1.05);
+      border-color: #00bfff;
+    }
+    .member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #00bfff;
+      margin-bottom: 15px;
+    }
+    .role {
+      color: #00bfff;
+      font-weight: bold;
+    }
+    .timeline {
+      max-width: 850px;
+      margin: 50px auto;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      background-color: #00bfff;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+    .step {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+    .step:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+    .step:nth-child(even) {
+      left: 50%;
+    }
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 25px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #00bfff;
+      border: 3px solid #000;
+      z-index: 1;
+    }
+    .step:nth-child(odd)::before {
+      right: -10px;
+    }
+    .step:nth-child(even)::before {
+      left: -10px;
+    }
+    h3 {
+      color: #00bfff;
+    }
+    p {
+      line-height: 1.6;
+      color: #ccc;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      color: #777;
+      font-size: 14px;
+    }
+    @media (max-width: 768px) {
+      header {
+        padding: 30px 15px;
+      }
+      header a {
+        top: 15px;
+        left: 15px;
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+      h1 {
+        font-size: 26px;
+      }
+      h2 {
+        font-size: 16px;
+      }
+      .project-image img {
+        width: 90%;
+        max-width: 300px;
+      }
+      .team-container {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+      }
+      .member {
+        padding: 15px;
+      }
+      .member img {
+        width: 100px;
+        height: 100px;
+      }
+      .timeline {
+        max-width: 100%;
+        margin: 20px auto;
+      }
+      .timeline::before {
+        left: 10px;
+      }
+      .step {
+        width: 100%;
+        left: 0 !important;
+        text-align: left !important;
+        padding: 15px 20px 15px 40px;
+      }
+      .step::before {
+        left: 10px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">← Trở lại trang chính</a>
+    <h1>DỰ ÁN PHẦN MỀM MOVIE APP</h1>
+    <h2>Thông tin nhóm và vai trò thực hiện</h2>
+  </header>
+
+  <div class="project-image">
+    <img src="appxemphim.jpg" alt="Hình ảnh dự án Movie App">
+  </div>
+
+  <section class="team-container">
+    <div class="member">
+      <img src="person.jpg" alt="Thành viên 1">
+      <h3>Nguyễn Văn Toàn</h3>
+      <p class="role">Backend Developer</p>
+      <p>Phụ trách thiết kế cơ sở dữ liệu, xây dựng API bằng Laravel và triển khai hệ thống backend.</p>
+    </div>
+
+    <div class="member">
+      <img src="person.jpg" alt="Thành viên 2">
+      <h3>Đỗ Kim Đại</h3>
+      <p class="role">Frontend Developer</p>
+      <p>Thiết kế giao diện Flutter, xử lý tương tác người dùng và tích hợp API với backend.</p>
+    </div>
+
+    <div class="member">
+      <img src="person.jpg" alt="Thành viên 3">
+      <h3>Nguyễn Tấn Lộc</h3>
+      <p class="role">Tester / QA</p>
+      <p>Viết test case, kiểm thử ứng dụng trên nhiều thiết bị và báo cáo lỗi cho đội phát triển.</p>
+    </div>
+
+    <div class="member">
+      <img src="person.jpg" alt="Thành viên 4">
+      <h3>Hà Hoàng Uy Vũ</h3>
+      <p class="role">Leader / UI/UX Designer</p>
+      <p>Lập nhóm chọn đề tài và người theo dõi vào báo cáo tình hình nhóm, tạo mockup, xây dựng phong cách màu sắc, tối ưu trải nghiệm người dùng trên nền tảng di động.</p>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <div class="step">
+      <h3>Giai đoạn 1: Khởi động dự án</h3>
+      <p>Thu thập yêu cầu từ người dùng, phân tích mục tiêu, xác định chức năng chính của ứng dụng xem phim và phân chia nhiệm vụ cho các thành viên.</p>
+    </div>
+
+    <div class="step">
+      <h3>Giai đoạn 2: Thiết kế hệ thống</h3>
+      <p>Xây dựng sơ đồ chức năng, mô hình cơ sở dữ liệu, và thiết kế UI/UX trên Figma. Chuẩn bị môi trường phát triển cho cả backend (Laravel) và frontend (Flutter).</p>
+    </div>
+
+    <div class="step">
+      <h3>Giai đoạn 3: Phát triển chức năng</h3>
+      <p>Phát triển các chức năng chính: đăng ký OTP, đăng nhập, xem phim, lưu phim, mua gói VIP qua VNPay và quản lý phim trong trang admin.</p>
+    </div>
+
+    <div class="step">
+      <h3>Giai đoạn 4: Kiểm thử và triển khai</h3>
+      <p>Thực hiện kiểm thử chức năng, hiệu suất và giao diện trên các thiết bị di động. Sau đó triển khai ứng dụng và tổng kết báo cáo dự án.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2024 Movie App Project - Nhóm 9 CNTT
+  </footer>
+</body>
+</html>
