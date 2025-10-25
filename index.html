@@ -200,6 +200,9 @@ nav a.active {
 
 
   </style>
+
+  
+
 </head>
 <body>
   <div class="site" role="main">
@@ -290,7 +293,7 @@ nav a.active {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill="#fff" d="M22.675 0H1.325C.593 0 0 .592 0 1.324v21.352C0 23.408.593 24 1.325 24h11.495v-9.294H9.691V11.41h3.129V8.816c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.313h3.587l-.467 3.296h-3.12V24h6.116C23.407 24 24 23.408 24 22.676V1.324C24 .592 23.407 0 22.675 0z"></path></svg>
               Facebook
             </a>
-            <a class="btn ghost" href="/cv.pdf" target="_blank">Dowload CV</a>
+            <button id="downloadPDF" class="download-btn">Download CV</button>
           </div>
         </div>
       </aside>
@@ -314,7 +317,7 @@ nav a.active {
             <hr>- Xem ngoại tuyến: Tải phim về xem khi không có internet.
             <hr>- Đề xuất thông minh: Thuật toán cá nhân hóa nội dung.
             <hr>- Thanh toán VNPay: Nhanh chóng, bảo mật cho các gói hội viên.</p>
-            <a href="project-detail.html?id=1" class="btn ghost">Xem chi tiết</a>
+            <a href="index2.html" class="btn ghost">Xem chi tiết</a>
             </div>
             <button class="more-toggle" data-target="proA">Xem thêm</button>  
           </div>
@@ -324,8 +327,8 @@ nav a.active {
         <!-- Project B -->
         <article class="project">
           <div>
-            <h4>Ứng dụng Điểm danh</h4>
-            <div class="meta">Vai trò: <strong>Team Lead</strong> • Thời gian: <strong>01/2023 - 05/2023</strong></div>
+            <h4>Web đặt phòng</h4>
+            <div class="meta">Vai trò: <strong>Font-end Developer</strong> • Thời gian: <strong>04/2025 - 06/2025</strong></div>
             <div class="more-content collapsed" id="proB">
             <p style="margin-top:8px">
             Mô tả: Web Đặt Phòng là giải pháp trực tuyến giúp người dùng tìm kiếm, so sánh và đặt phòng khách sạn, resort một cách dễ dàng và minh bạch. Website cung cấp hệ thống tìm kiếm thông minh với các bộ lọc chi tiết và hiển thị các đánh giá xác thực từ khách hàng đã lưu trú. Đặc biệt, Web Đặt Phòng cho phép người dùng đăng ký các Gói Hội Viên độc quyền để nhận ưu đãi, với tất cả giao dịch thanh toán được xử lý an toàn, tức thời thông qua tích hợp VNPay.
@@ -335,7 +338,7 @@ nav a.active {
             <hr>- Đánh giá minh bạch: Hiển thị đánh giá xác thực từ người dùng.
             <hr>- Gói Hội Viên Ưu Đãi: Lợi ích độc quyền cho khách hàng thân thiết.
             <hr>- Thanh toán VNPay: Nhanh chóng, thuận tiện khi đặt phòng mọi lúc mọi nơi</p>
-            <a href="project-detail.html?id=1" class="btn ghost">Xem chi tiết</a>
+            <a href="index3.html" class="btn ghost">Xem chi tiết</a>
             </div>
             <button class="more-toggle" data-target="proB">Xem thêm</button>
           </div>
@@ -343,6 +346,21 @@ nav a.active {
         </article>
         
         <!-- Add more projects as needed -->
+         <article class="project">
+          <div>
+            <h4>Web Fundelio ( Đang thực hiện )</h4>
+            <div class="meta">Vai trò: <strong>Font-end Developer</strong> • Thời gian: <strong>10/2025 - 11/2025</strong></div>
+            <div class="more-content collapsed" id="proC">
+            <p style="margin-top:8px">
+            Mô tả: Fundelio là một nền tảng gây quỹ cộng đồng (reward-based crowdfunding) giúp các startup huy động vốn minh bạch mà không cần chia cổ phần. Dự án sử dụng công nghệ hiện đại như React.js, Tailwind CSS, Laravel, MySQL và JWT để xây dựng hệ thống xác thực, quản lý chiến dịch, ví điện tử, thông báo thời gian thực và thanh toán qua VNPAY. Fundelio áp dụng mô hình All-or-Nothing nhằm đảm bảo niềm tin cho nhà đầu tư: chỉ khi chiến dịch đạt mục tiêu thì số tiền mới được chuyển cho founder, nếu thất bại sẽ hoàn tiền cho backer. Với giao diện thân thiện, phân quyền rõ ràng (Founder, Backer, Admin) và quy trình làm việc chuyên nghiệp qua GitHub, Docker, AWS, Fundelio hướng đến việc hỗ trợ các startup Việt tiếp cận cộng đồng đầu tư hiệu quả và minh bạch hơn.
+          </p>
+            <p class="small">coming soon</p>
+            <a href="https://thuanfhu.github.io/UTH-team-portfolio-hub/" class="btn ghost">Xem thành viên nhóm</a>
+            </div>
+            <button class="more-toggle" data-target="proC">Xem thêm</button>
+          </div>
+          <img src="webFundelioDev.jpg" alt="Project C">
+        </article>
       </div>
     </section>
 
@@ -431,7 +449,6 @@ nav a.active {
           <a class="btn ghost" id="mailtoFallback" href="mailto:dokimdai109@gmail.com">Gửi bằng Email</a>
         </div>
       </form>
-      <p class="small" style="margin-top:8px">Lưu ý: Form dùng action demo. Khi deploy, thay bằng endpoint thực tế (API, Formspree, Netlify Forms...). Nếu không, người dùng có thể gửi bằng ứng dụng email (nút Gửi bằng Email).</p>
     </section>
 
     <!-- FOOTER pinned close to bottom -->
@@ -587,7 +604,5 @@ nav a.active {
     });
   });
 </script>
-
-
 </body>
 </html>
